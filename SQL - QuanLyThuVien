@@ -1,0 +1,116 @@
+-- ông thu gọn mấy hàm cho dễ xem hơn.
+
+-- tao DB
+CREATE DATABASE QuanLyThuvien
+GO
+-- Thao tac tren DB
+USE QuanLyThuvien
+GO
+--TạoBảng Book
+CREATE TABLE Book
+(IDBook INT,
+NameBook NVARCHAR(30),
+Author NVARCHAR(30),
+Publication NVARCHAR(30),
+PurchaseDate DATE )
+GO
+-- Thêm dữ liệu  - BảngBook
+DECLARE @i INT =0 
+WHILE @i<100
+BEGIN
+INSERT INTO dbo.Book
+(
+    IDBook,
+    NameBook,
+    Author,
+    Publication,
+    PurchaseDate
+)
+VALUES
+(   @i,       -- IDBook - char(10)
+    N'Bao giờ bạn say',      -- NameBook - nvarchar(30)
+    N'Nhóm 1',      -- Author - nvarchar(30)
+    N'Nhà xuất bản giáo dục',      -- Publication - nvarchar(30)
+    '20201006' -- PurchaseDate - date
+    )
+	SET @i+=1
+END
+GO
+-- Xóa toàn bộ dữ liệu  trong Bảng Book: TRUNCATE TABLE  dbo.Book
+-- Xóa dòng theo điều  kiện  - Bảng book
+DELETE dbo.Book WHERE IDBook= 2 AND Author='Ph?m nh?t khánh'-- gán id
+GO
+--======================
+
+--Tạo Bảng Mượn - Trả sách
+CREATE TABLE IssueReturnBook
+(IDStudent INT, 
+Department CHAR(15),
+Email CHAR(50), 
+BorrowerBookName nvarchar(30), 
+IssueDate date,
+ReturnDate date)
+GO
+-- Thêm dữ liệu  - Bảng IssueReturnBook
+DECLARE @i INT =0 
+WHILE @i<100
+BEGIN
+INSERT INTO dbo.IssueReturnBook
+(
+    IDStudent,
+    Department,
+    Email,
+    BorrowerBookName,
+    IssueDate,
+    ReturnDate
+)
+VALUES
+(   @i,       -- IDStudent - int
+    '',        -- Department - char(15)
+    '',        -- Email - char(50)
+    N'nhóm 1',       -- BorrowerBookName - nvarchar(30)
+    '20201007', -- IssueDate - date
+    NULL -- ReturnDate - date
+    )
+	SET @i+=1
+END
+GO
+--  Xóa dữ liệu trong table  - Bảng IssueReturnBook.
+TRUNCATE TABLE  dbo.IssueReturnBook
+GO
+-- Update dữ liệu  - Bảng IssueReturnBook.
+-- Update dữ liệu của 1 dòng mong muốn
+UPDATE dbo.IssueReturnBook SET IDStudent =2,Department='CNTTB',BorrowerBookName='NHOM1' WHERE IDStudent =99
+
+GO
+--=========================
+
+--Tạo Bảng Thông tin Sinh Viên
+CREATE TABLE Student
+(
+IDStudent INT, 
+NameStudent NVARCHAR(30),
+Department CHAR(15),
+Email CHAR(50), 
+PhoneNumeber CHAR(15))
+-- Thêm dữ liệu - Bảng Student
+DECLARE @i INT =0
+WHILE @i<20
+BEGIN
+    INSERT INTO Student (IDStudent, NameStudent ,Department ,Email , PhoneNumeber ) 
+	VALUES 
+	(
+	@i,
+	N'nhóm 1',
+	'cntt',
+	'khanh@',
+	'****'
+	)
+	SET @i+=1
+END
+GO
+
+--Xóa 
+TRUNCATE TABLE Student
+--Sửa
+UPDATE dbo.Student SET IDStudent =3, Department='sad',PhoneNumeber='2244534677'WHERE IDStudent=1
