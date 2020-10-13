@@ -1,0 +1,84 @@
+CREATE DATABASE [QuanLyThuVien]
+go
+USE [QuanLyThuVien]
+GO
+/****** Object:  Table [dbo].[Book_Issues]    Script Date: 10/13/2020 12:56:44 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Book_Issues](
+	[Bk_Issue_Id] INT IDENTITY(1,1) NOT NULL,
+	[Date_Of_Issue] [datetime] NULL,
+	[Date_Of_Return] [datetime] NULL,
+	[Book_Id] [int] NULL,
+	[User_id_] [int] NULL,
+ CONSTRAINT [Books_Issues_Bk_Issue_Id_PK] PRIMARY KEY CLUSTERED 
+(
+	[Bk_Issue_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Books]    Script Date: 10/13/2020 12:56:44 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Books](
+	[Book_Id] INT IDENTITY(1,1) NOT NULL,
+	[Book_Name] [nvarchar](100) NULL,
+	[Author_Name] [nvarchar](100) NULL,
+	[category_id] [int] NULL,
+	[Year_of_release] [int] NULL,
+ CONSTRAINT [Books_Book_Id_PK] PRIMARY KEY CLUSTERED 
+(
+	[Book_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 10/13/2020 12:56:44 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[category_id] INT IDENTITY(1,1) NOT NULL,
+	[category_name] [nvarchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 10/13/2020 12:56:44 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[User_Id_] INT IDENTITY(1,1) NOT NULL,
+	[Name_] NVARCHAR(100) NULL,
+	[Contact] VARCHAR(100) NULL,
+	[Year_] DATETIME NULL,
+	[Address_] NVARCHAR(100) NULL,
+ CONSTRAINT [User_Id_PK] PRIMARY KEY CLUSTERED 
+(
+	[User_Id_] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Book_Issues]  WITH CHECK ADD  CONSTRAINT [Book_Issues_Book_Id_FK] FOREIGN KEY([Book_Id])
+REFERENCES [dbo].[Books] ([Book_Id])
+GO
+ALTER TABLE [dbo].[Book_Issues] CHECK CONSTRAINT [Book_Issues_Book_Id_FK]
+GO
+ALTER TABLE [dbo].[Book_Issues]  WITH CHECK ADD  CONSTRAINT [Book_Issues_User_id_FK] FOREIGN KEY([User_id_])
+REFERENCES [dbo].[Users] ([User_Id_])
+GO
+ALTER TABLE [dbo].[Book_Issues] CHECK CONSTRAINT [Book_Issues_User_id_FK]
+GO
+ALTER TABLE [dbo].[Books]  WITH CHECK ADD  CONSTRAINT [Books_CategoryID_PK] FOREIGN KEY([category_id])
+REFERENCES [dbo].[Category] ([category_id])
+GO
+ALTER TABLE [dbo].[Books] CHECK CONSTRAINT [Books_CategoryID_PK]
+GO
