@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[Book_Issues](
 	[Date_Of_Return] [datetime] NULL,
 	[Book_Id] [int] NULL,
 	[User_id_] [int] NULL,
+	[Bki_Delete] [bit] NULL,
  CONSTRAINT [Books_Issues_Bk_Issue_Id_PK] PRIMARY KEY CLUSTERED 
 (
 	[Bk_Issue_Id] ASC
@@ -30,6 +31,7 @@ CREATE TABLE [dbo].[Books](
 	[Author_Name] [nvarchar](100) NULL,
 	[category_id] [int] NULL,
 	[Year_of_release] [int] NULL,
+	[BK_delete] [bit] NULL,
  CONSTRAINT [Books_Book_Id_PK] PRIMARY KEY CLUSTERED 
 (
 	[Book_Id] ASC
@@ -61,6 +63,7 @@ CREATE TABLE [dbo].[Users](
 	[Contact] VARCHAR(100) NULL,
 	[Year_] DATETIME NULL,
 	[Address_] NVARCHAR(100) NULL,
+	[UDelete] [bit] NULL,
  CONSTRAINT [User_Id_PK] PRIMARY KEY CLUSTERED 
 (
 	[User_Id_] ASC
